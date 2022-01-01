@@ -1,0 +1,46 @@
+<div>
+    Start Date <input type="date" [(ngModel)]="startDate">
+     &nbsp; &nbsp; &nbsp; End Date <input type="date" [(ngModel)]="endDate">
+      &nbsp; &nbsp; &nbsp; <button value="Filter Records" (click)="filterRecords()" name = "Filter Rec">Filter</button>
+      &nbsp; &nbsp; &nbsp; <button value="Download B2B Summary" (click)="downloadCSVForB2B()" name = "Download B2B Summary">Download B2B Summary</button>
+      &nbsp; &nbsp; &nbsp; <button value="Download B2C Summary" (click)="downloadCSVForB2C()" name = "Download B2B Summary">Download B2C Summary</button>
+
+</div>
+<div class="summary-container">
+    <div class="row bgRowOdd" style="border-top: 1px solid black; border-bottom: 1px solid black;">
+        <div class="col-lg-1">Name</div>
+        <div class="col-lg-1">GSTIN</div>
+        <div class="col-lg-1">State of Supply</div>
+        <div class="col-lg-1">Invoice Number</div>
+        <div class="col-lg-1">Date</div>
+        <div class="col-lg-1">Invoice Value</div>
+        <div class="col-lg-1">Taxable Value</div>
+        <div class="col-lg-1">IGST AMT</div>
+        <div class="col-lg-1">CGST AMT</div>
+        <div class="col-lg-1">SGST AMT</div>
+        <div class="col-lg-1">Total Tax</div>
+        
+        <div class="col-lg-1">Edit/ View</div>
+    </div>
+    <div  class="summaryData">
+        <div class="row"  *ngFor="let detail of summary;  let in=index; " [class.bgRowOdd]="in%2!=0">
+            <div class="col-lg-1" style="    content-visibility: auto;     overflow-x: auto;">{{detail.customer.customerName}}</div>
+            <div class="col-lg-1" style="    content-visibility: auto;     overflow-x: auto;">{{detail.customer.customerGst}}</div>
+            <div class="col-lg-1" style="    content-visibility: auto;     overflow-x: auto;">{{detail.customer.customerState}}</div>
+            <div class="col-lg-1">{{detail.invoiceNo}}</div>
+            <div class="col-lg-1" style="    content-visibility: auto;">{{detail.invoiceDate}}</div>
+            <div class="col-lg-1">{{detail.totalInvoiceValue | number : '1.2-2'}}</div>
+            <div class="col-lg-1">{{detail.totalTaxableValue | number : '1.2-2'}}</div>
+            <div class="col-lg-1">{{detail.taxAmtIgst5+detail.taxAmtIgst12+detail.taxAmtIgst18+detail.taxAmtIgst28 | number : '1.2-2'}}</div>
+            <div class="col-lg-1">{{detail.taxAmtsgstorcgst5+detail.taxAmtsgstorcgst12+detail.taxAmtsgstorcgst18+detail.taxAmtsgstorcgst28 | number : '1.2-2'}}</div>
+            <div class="col-lg-1">{{detail.taxAmtsgstorcgst5+detail.taxAmtsgstorcgst12+detail.taxAmtsgstorcgst18+detail.taxAmtsgstorcgst28 | number : '1.2-2'}}</div>
+            <div class="col-lg-1">{{detail.taxAmtsgstorcgst5+detail.taxAmtsgstorcgst12+detail.taxAmtsgstorcgst18+detail.taxAmtsgstorcgst28+detail.taxAmtsgstorcgst5+detail.taxAmtsgstorcgst12+detail.taxAmtsgstorcgst18+detail.taxAmtsgstorcgst28+detail.taxAmtIgst5+detail.taxAmtIgst12+detail.taxAmtIgst18+detail.taxAmtIgst28 | number : '1.2-2'}}</div>
+            <div class="col-lg-1">
+                <span style="cursor: pointer; background-color: cornflowerblue; color: cornsilk; border-color: darkblue; border: 1px solid;"  (click)="editInvoice(in)">EDIT</span>
+                 <span style="cursor: pointer; background-color: cornflowerblue; color: cornsilk; border-color: darkblue; border: 1px solid;" (click)="viewInvoice(in)">VIEW</span> </div>
+            </div></div>
+  
+</div>
+<div>
+    <span style="float: right;">Scroll to see more data</span>
+</div>

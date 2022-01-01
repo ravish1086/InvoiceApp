@@ -1,0 +1,48 @@
+.editmode1
+{
+    display:none;
+}
+.editmode2
+{
+    display: block;
+}
+.addProducts
+{
+    margin-left: 100px;
+    margin-right: 100px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: cadetblue;
+    border-radius: 10px;
+border:2px solid black;
+color: white;
+    
+}
+.summary-container
+{
+    font-size: 14px;
+    padding-left: 10px;
+}
+.bgRowOdd
+{
+     background-color: rgb(236, 236, 236);
+}
+.bgRowEven
+{
+    background-color: white;
+}
+.productData
+{
+    overflow-y:scroll ; height: 70vh;
+}
+.productData::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.productData {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

@@ -1,0 +1,59 @@
+<div class="container">
+    <br>
+    <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    
+        <div class="row">
+          <div class="col-lg-3 division">
+            <label for="invoiceNum">Invoice Number</label>
+            <input type="text" name="invoiceNum" id="" formControlName="invoiceNum">
+          </div>
+          <div class="col-lg-3 division">
+            <label for="purchasedFrom">Purchased From</label><br>
+            <input id="seller" list="sellers"  formControlName="purchasedFrom">
+            <datalist  id="sellers" >
+              
+              <option value="{{seller.sellerName}}" *ngFor="let seller of sellers">{{seller.sellerName}}</option>
+             
+            </datalist>
+          </div>
+          <div class="col-lg-3 division">
+            <label for="productName">Product Name</label><br>
+            <input id="product" list="products"  formControlName="productName" (ngModelChange)="mapSelectedProduct()">
+            <datalist id="products" >
+              <option [value]="product.productName+'_arr_'+i" *ngFor="let product of products; let i = index;">{{product.productName}}</option>
+             
+            </datalist>
+          </div>
+          <div class="col-lg-3 division"> <label for="datePurchase">Date of Purchase</label>
+            <input type="date" name="datePurchase" id="" formControlName="datePurchase">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3 division">
+            <label for="quantity">Quantity</label><br>
+            <input type="number" name="quantity" id="" formControlName="quantity">
+          </div>
+          <div class="col-lg-3 division">
+            <label for="unit">Unit</label><br>
+            <select name="unit" id="" formControlName="unit">
+              <option value="{{product.productUnit}}" *ngFor="let product of products">{{product.productUnit}}</option>
+            </select>
+          </div>
+          <div class="col-lg-3 division">
+            <label for="rate">Rate</label><br>
+            <input type="number" name="rate" id="" formControlName="rate">
+          </div>
+          <div class="col-lg-3 division">
+            <label for="amount">Amount</label><br>
+            <input type="number" name="amount" id="" formControlName="amount">
+          </div>
+          <div class="col-lg-3 division"></div>
+        </div>
+        <br>
+       <div class="btn-position">
+        <button type="submit" [disabled]="!productForm.valid" class="btn btn-primary">Add Entry</button>
+       </div>
+    </form>
+    
+   
+    </div>

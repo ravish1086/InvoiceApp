@@ -1,0 +1,26 @@
+.summary-container
+{
+    font-size: 14px;
+    padding-left: 10px;
+}
+.bgRowOdd
+{
+     background-color: rgb(236, 236, 236);
+}
+.bgRowEven
+{
+    background-color: white;
+}
+.summaryData
+{
+    overflow-y:scroll ; height: 70vh;
+}
+.summaryData::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.summaryData {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}

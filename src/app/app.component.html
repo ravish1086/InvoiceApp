@@ -1,0 +1,48 @@
+<div #screen>
+  <nav class="navbar navbar-dark bg-primary" id="nav-div">
+    <!-- Navbar content -->
+    <span class="title"> {{title}} </span>
+    <span><button value="Screenshot" (click)="capture()">Screenshot</button></span>
+  </nav>
+  <ul class="nav justify-content-center" id="ul-div">
+    <li class="nav-item">
+      <a class="nav-link active" routerLink="home">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="addedStockEntries">All Stock Entries</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="sellerdetails">Seller Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " routerLink="productdetails">Product Details</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " routerLink="createInvoice">Create Invoice</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link " routerLink="customers">Customers</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="saleSummary">Sales Summary</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="hsnSummary">HSN Summary</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="createNegativeInvoice">Create Negative Invoice</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" routerLink="payments">Payments</a>
+    </li>
+    
+  </ul>
+  <div class="content-outlet">
+    <router-outlet></router-outlet>
+  </div>
+  
+</div>
+<div  id="screenshot-div">
+  <a class="view-btn-attach" *ngIf="show" [href]="selectedFileBLOB" target="_blank">View</a>
+  <!-- <img  src="../../src/assets/screenshot.png"> -->
+</div>

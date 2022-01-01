@@ -1,0 +1,153 @@
+
+
+<div *ngIf="isImport"><input type="file" (change)="onFileChange($event)" multiple="false" /></div>
+<table>
+    <tbody>
+        <tr *ngFor="let row of data">
+                <td *ngFor="let cell of row">
+                        {{cell}}
+                </td>
+        </tr>
+    </tbody>
+</table>
+
+<div>
+  <img src="../../assets/img/add.jpg" alt="" (click)="showForm()" style="height: 30px; width: 30px;">
+</div>
+
+
+<div class="addProducts" *ngIf="addProductsForm">
+
+  <div class="row">
+    <div class="col-lg-3">Product Name</div>
+    <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="name"></div>
+    <div class="col-lg-3">Product HSN</div>
+    <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="hsn"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">Product Price</div>
+    <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="price"></div>
+    <div class="col-lg-3">Product Tax Rate</div>
+    <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="taxrate"></div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">Product Unit</div>
+    <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="unit"></div>
+    <div class="col-lg-3"></div>
+    <div class="col-lg-3"></div>
+  </div>
+  
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-2">&nbsp;</div>
+    
+    <div class="col-lg-3"></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-2"></div>
+    
+    <div class="col-lg-3"></div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"><button class="btn-primary" (click)="addProduct()">Add Product</button></div>
+  </div>
+  
+</div>
+
+<div class="container">
+    <table class="table table-sm">
+        <thead>
+          <tr class="bgRowOdd">
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Hsn</th>
+            <th scope="col">Product Price</th>
+            <th scope="col">Product TaxRate</th>
+            <th scope="col">Product Unit</th>
+            <th>&nbsp;</th>
+            <th>&nbsp;</th>
+            
+          </tr>
+        </thead>
+        <tbody class="productData">
+          <tr *ngFor="let entry of savedProducts; let i=index;" [class.bgRowOdd]="i%2!=0">
+            <th scope="row"><input  class="editmode1" style="width:400px;" type="text" [(ngModel)]="entry.productName"><span class="editmode2">{{entry.productName}}</span></th>
+            <td><input class="editmode1" style="width:100px;"  type="text" [(ngModel)]="entry.productHsn"><span class="editmode2">{{entry.productHsn}}</span></td>
+            <td><input  class="editmode1" style="width:100px;" type="text" [(ngModel)]="entry.productPrice"><span class="editmode2">{{entry.productPrice}}</span></td>
+            <td><input  class="editmode1" style="width:100px;" type="text" [(ngModel)]="entry.productTaxRate"><span class="editmode2">{{entry.productTaxRate}}</span></td>
+            <td><input  class="editmode1" style="width:100px;" type="text" [(ngModel)]="entry.productUnit"><span class="editmode2">{{entry.productUnit}}</span></td>
+            <td><span style="background-color: cornsilk;" (click)="toggleEdit(i)">EDIT</span> </td>
+            <td><span style="background-color: cornsilk;" (click)="SaveRecords(entry,i)">SAVE</span> </td>
+          </tr>
+         
+        </tbody>
+      </table>
+</div>
+
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+
+
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="addProducts" *ngIf="addProductsForm">
+
+          <div class="row">
+            <div class="col-lg-3">Product Name</div>
+            <div class="col-lg-3"><input type="text" name="" id=""></div>
+            <div class="col-lg-3">Product HSN</div>
+            <div class="col-lg-3"><input type="text" name="" id=""></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">Product Price</div>
+            <div class="col-lg-3"><input type="text" name="" id=""></div>
+            <div class="col-lg-3">Product Tax Rate</div>
+            <div class="col-lg-3"><input type="text" name="" id=""></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">Product Unit</div>
+            <div class="col-lg-3"><input type="text" name="" id=""></div>
+            <div class="col-lg-3"></div>
+            <div class="col-lg-3"></div>
+          </div>
+          
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2">&nbsp;</div>
+            
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+          </div>
+        
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2"></div>
+            
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"><button class="primary">Add Product</button></div>
+          </div>
+          
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div> -->

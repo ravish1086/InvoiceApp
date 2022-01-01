@@ -1,0 +1,103 @@
+<div *ngIf="isImport">
+    <input type="file" (change)="onFileChange($event)" multiple="false" />
+    </div>
+  <table>
+      <tbody>
+          <tr *ngFor="let row of data">
+                  <td *ngFor="let cell of row">
+                          {{cell}}
+                  </td>
+          </tr>
+      </tbody>
+  </table>
+  
+  <div>
+    <img src="../../assets/img/add.jpg" alt="" (click)="showForm()" style="height: 30px; width: 30px;">
+  </div>
+  
+  
+  <div class="addProducts" *ngIf="addCustomerForm">
+  
+    <div class="row">
+      <div class="col-lg-3">Customer Name</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="name"></div>
+      <div class="col-lg-3">Customer GST</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="gst"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">Customer PAN</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="pan"></div>
+      <div class="col-lg-3">Customer Contact</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="contact"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">Customer Address</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="address"></div>
+      <div class="col-lg-3">Customer Shop No</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="shopno"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">Customer Area</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="area"></div>
+      <div class="col-lg-3">Customer City</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="city"></div>
+    </div>
+    <div class="row">
+      <div class="col-lg-3">Customer State</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="state"></div>
+      <div class="col-lg-3">Customer Country</div>
+      <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="country"></div>
+    </div>
+    
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-2">&nbsp;</div>
+      
+      <div class="col-lg-3"></div>
+      <div class="col-lg-2"></div>
+      <div class="col-lg-2"></div>
+    </div>
+  
+    <div class="row">
+      <div class="col-lg-3"></div>
+      <div class="col-lg-2"></div>
+      
+      <div class="col-lg-3"></div>
+      <div class="col-lg-2"></div>
+      <div class="col-lg-2"><button class="btn-primary" (click)="addCustomer()">Add Product</button></div>
+    </div>
+    
+  </div>
+
+
+  <div class="container">
+      <table class="table table-sm">
+          <thead>
+            <tr>
+              <th scope="col">Customer Name</th>
+              <th scope="col">Customer GST</th>
+              <th scope="col">Customer Pan</th>
+              <th scope="col">Customer Contact</th>
+              <th scope="col">Customer Address</th>
+              <th>&nbsp;</th>
+              <th>&nbsp;</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of savedCustomers; let i=index;">
+              <th scope="row"><input  class="editmode1" style="width:300px;" type="text" [(ngModel)]="entry.customerName"><span class="editmode2">{{entry.customerName}}</span></th>
+              <td><input  class="editmode1" style="width:150px;" type="text" [(ngModel)]="entry.customerGst"><span class="editmode2">{{entry.customerGst}}</span></td>
+              <td><input  class="editmode1" style="width:100px;" type="text" [(ngModel)]="entry.customerPan"><span class="editmode2">{{entry.customerPan}}</span></td>
+              <td><input  class="editmode1" style="width:100px;" type="text" [(ngModel)]="entry.customerContact"><span class="editmode2">{{entry.customerContact}}</span></td>
+              <td><input  class="editmode1" style="width:300px;" type="text" [(ngModel)]="entry.customerAddress"><span class="editmode2">{{entry.customerAddress}}</span></td>
+              <td><span style="background-color: cornsilk;" (click)="toggleEdit(i)">EDIT</span> </td>
+              <td><span style="background-color: cornsilk;" (click)="SaveRecords(entry,i)">SAVE</span> </td>
+           
+            </tr>
+           
+          </tbody>
+        </table>
+  </div>
+  
+  

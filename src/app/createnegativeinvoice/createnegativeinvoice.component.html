@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3 div-head">Invoice Date</div>
-        <div class="col-lg-3 div-head">{{todaysDate}}</div>
+        <div class="col-lg-3 div-head">{{todaysDate | date:'dd-MMM-yyyy'}}</div>
         <div class="col-lg-3 div-head">Reverse Charge</div>
         <div class="col-lg-3 div-head">{{reverseCharge}}</div>
     </div>
@@ -39,8 +39,21 @@
         <div class="col-lg-3 div-head">Customer GSTIN</div>
         <div class="col-lg-3 div-head">{{customer.customerGst}}</div>
     </div>
-    
-    <div class="row">
+    <div class="row" >
+        <div class="col-lg-3 "></div>
+        <div class="col-lg-3 "></div>
+        <div class="col-lg-3 "></div>
+        <div class="col-lg-3 " >
+            <div style="text-align: right; margin-right: -90px; ">
+                <img (click)="addRow()" style="cursor: pointer ; " src="../../assets/img/icons8-add-64.png" alt="" height="35px" width="35px">
+                <img (click)="deleteRow()" style="cursor: pointer ;  " src="../../assets/img/icons8-remove-48.png" alt="" height="35px" width="35px">
+          
+            </div>
+            <!-- <div style="text-align: right;"><button (click)="addRow()" style="text-align: right;" class="btn btn-primary">Add Product</button></div> -->
+            <!-- <button (click)="sendData()">Submit</button></div> -->
+        
+    </div>
+    <div class="row" style="margin-top: -3%;">
         <div class="col-lg-1 div-head">Sr No.</div>
         <div class="col-lg-3 div-head">Product Name</div>
         <div class="col-lg-1 div-head">Unit</div>
@@ -55,49 +68,50 @@
         <div class="col-lg-1 div-head">Amount</div>
 
     </div>
-
+    <div style="height: 220px; overflow-y: scroll; width: 102%;">
     <div class="row" *ngFor="let invoice of invoiceView; let i=index; ">
         <div class="col-lg-1 div-head"><input type="text" name="" value="{{i+1}}" id="id1"></div>
         <div class="col-lg-3 div-head">
-            <select id="" name="{{invoice.productName}}" [(ngModel)]="invoice.productName"
+            <!-- <select id="" name="{{invoice.productName}}" [(ngModel)]="invoice.productName"
                 (change)="populateFields(invoice.productName,i)">
                 <option value="{{product.productName}}" *ngFor="let product of products; let in=index;">
                     {{product.productName}}</option>
 
-            </select>
+            </select> -->
+            <input list="products" name="{{invoice.productName}}" id="" #gst (change)="populateFields(invoice.productName,i)" [(ngModel)]="invoice.productName">
+
+            <datalist id="products">
+                <option value="{{product.productName}}" *ngFor="let product of products; let in=index;">{{product.productName}}
+                </option>
+            </datalist>
             <br>
             <input type="text" name="{{invoice.description}}" id="id3" [(ngModel)]="invoice.description">
         </div>
-        <div class="col-lg-1 div-head"><input type="text" name="{{invoice.unit}}" id="id3" [(ngModel)]="invoice.unit">
+        <div class="col-lg-1 div-head"><input type="text" name="{{invoice.unit}}" id="id3" [(ngModel)]="invoice.unit" disabled>
         </div>
-        <div class="col-lg-1 div-head"><input type="text" name="{{invoice.hsn}}" id="id3" [(ngModel)]="invoice.hsn">
+        <div class="col-lg-1 div-head"><input type="text" name="{{invoice.hsn}}" id="id3" [(ngModel)]="invoice.hsn" disabled>
         </div>
         <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.taxRate" name="{{invoice.taxRate}}"
-                id="id4"></div>
+                id="id4" disabled></div>
         <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.quantity" name="{{invoice.quantity}}"
                 id="id5" (keyup)="calculateAmount(i)"></div>
-        <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.rate" name="{{invoice.rate}}" id="id6">
+        <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.rate" name="{{invoice.rate}}" id="id6" (keyup)="calculateAmount(i)">
         </div>
-        <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.sgst" name="{{invoice.sgst}}" id="id8">
+        <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.sgst" name="{{invoice.sgst}}" id="id8" disabled>
         </div>
-        <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.cgst" name="{{invoice.cgst}}" id="id9">
+        <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.cgst" name="{{invoice.cgst}}" id="id9" disabled>
         </div>
-        <div class="col-lg-1 div-head" *ngIf="interstate"><input type="text" [(ngModel)]="invoice.Igst" name="{{invoice.Igst}}" id="id9">
+        <div class="col-lg-1 div-head" *ngIf="interstate"><input type="text" [(ngModel)]="invoice.Igst" name="{{invoice.Igst}}" id="id9" disabled>
         </div>
         
 
         <div class="col-lg-1 div-head"><input type="text" [(ngModel)]="invoice.amount" name="{{invoice.amount}}"
-                id="id7"></div>
+                id="id7" disabled></div>
     </div>
+    </div>
+    
     <br>
-    <div class="row" >
-        <div class="col-lg-3 "></div>
-        <div class="col-lg-3 "></div>
-        <div class="col-lg-3 "></div>
-        <div class="col-lg-3 " ><div style="text-align: right;"><button (click)="addRow()" style="text-align: right;">Add Product</button></div>
-            <!-- <button (click)="sendData()">Submit</button></div> -->
-        
-    </div>
+
     <!-- <select name="" id=""><option value="option value">option Value</option></select> -->
     <div class="footer">
         <div class="taxDescription">
@@ -111,7 +125,7 @@
         </div>
 
         <div class="invTotal">
-            <button (click)="createInvoice()">Create Invoice</button>
+            <button (click)="createInvoice()" class="btn btn-primary">Create Invoice</button>
             <table>
 
                 <tr>

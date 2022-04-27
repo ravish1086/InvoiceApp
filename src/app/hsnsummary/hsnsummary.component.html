@@ -1,8 +1,8 @@
 <div>
     Start Date <input type="date" [(ngModel)]="startDate">
      &nbsp; &nbsp; &nbsp; End Date <input type="date" [(ngModel)]="endDate">
-     &nbsp; &nbsp; &nbsp; <button value="Filter Records" (click)="filterRecords()" name = "Filter Rec">Filter</button>
-      &nbsp; &nbsp; &nbsp;  <button value="Generate HSN Summary CSV" (click)="downloadHSNCSV()">Export to CSV</button>
+     &nbsp; &nbsp; &nbsp; <button class="btn btn-primary" value="Filter Records" (click)="filterRecords()" name = "Filter Rec">Filter</button>
+      &nbsp; &nbsp; &nbsp;  <button class="btn btn-primary" value="Generate HSN Summary CSV" (click)="downloadHSNCSV()">Export to CSV</button>
       
      
 </div>
@@ -20,9 +20,9 @@
 <div class="row" *ngFor="let item of generatedHSNsummary; let i=index" style="border-bottom:1px solid black;" [class.bgRowOdd]="i%2!=0">
     <div class="col-lg-2">{{item.hsn}}</div>
     <div class="col-lg-1">{{item.unit}}</div>
-    <div class="col-lg-2">Rs. {{item.cgst}}</div>
-    <div class="col-lg-2">Rs. {{item.sgst}}</div>
+    <div class="col-lg-2">Rs. {{item.cgst | number : '1.2-2'}}</div>
+    <div class="col-lg-2">Rs. {{item.sgst | number : '1.2-2'}}</div>
     <div class="col-lg-1">{{item.taxRate}} </div>
-    <div class="col-lg-2">Rs. {{item.taxableAmount}} </div>
+    <div class="col-lg-2">Rs. {{item.taxableAmount | number : '1.2-2'}} </div>
     <div class="col-lg-2">{{item.quantity}}</div>
 </div>

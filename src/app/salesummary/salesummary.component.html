@@ -1,9 +1,9 @@
 <div>
     Start Date <input type="date" [(ngModel)]="startDate">
      &nbsp; &nbsp; &nbsp; End Date <input type="date" [(ngModel)]="endDate">
-      &nbsp; &nbsp; &nbsp; <button value="Filter Records" (click)="filterRecords()" name = "Filter Rec">Filter</button>
-      &nbsp; &nbsp; &nbsp; <button value="Download B2B Summary" (click)="downloadCSVForB2B()" name = "Download B2B Summary">Download B2B Summary</button>
-      &nbsp; &nbsp; &nbsp; <button value="Download B2C Summary" (click)="downloadCSVForB2C()" name = "Download B2B Summary">Download B2C Summary</button>
+      &nbsp; &nbsp; &nbsp; <button class="btn btn-primary" value="Filter Records" (click)="filterRecords()" name = "Filter Rec">Filter</button>
+      &nbsp; &nbsp; &nbsp; <button class="btn btn-primary" value="Download B2B Summary" (click)="downloadCSVForB2B()" name = "Download B2B Summary">Download B2B Summary</button>
+      &nbsp; &nbsp; &nbsp; <button class="btn btn-primary" value="Download B2C Summary" (click)="downloadCSVForB2C()" name = "Download B2B Summary">Download B2C Summary</button>
 
 </div>
 <div class="summary-container">
@@ -28,7 +28,7 @@
             <div class="col-lg-1" style="    content-visibility: auto;     overflow-x: auto;">{{detail.customer.customerGst}}</div>
             <div class="col-lg-1" style="    content-visibility: auto;     overflow-x: auto;">{{detail.customer.customerState}}</div>
             <div class="col-lg-1">{{detail.invoiceNo}}</div>
-            <div class="col-lg-1" style="    content-visibility: auto;">{{detail.invoiceDate}}</div>
+            <div class="col-lg-1" style="    content-visibility: auto;">{{detail.invoiceDate | date:'dd-MMM-yyyy'}}</div>
             <div class="col-lg-1">{{detail.totalInvoiceValue | number : '1.2-2'}}</div>
             <div class="col-lg-1">{{detail.totalTaxableValue | number : '1.2-2'}}</div>
             <div class="col-lg-1">{{detail.taxAmtIgst5+detail.taxAmtIgst12+detail.taxAmtIgst18+detail.taxAmtIgst28 | number : '1.2-2'}}</div>

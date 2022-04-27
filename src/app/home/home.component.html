@@ -1,10 +1,10 @@
-<div class="container">
+<div class="my-container">
     <br>
     <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
     
         <div class="row">
           <div class="col-lg-3 division">
-            <label for="invoiceNum">Invoice Number</label>
+            <label for="invoiceNum">Invoice Number</label><br>
             <input type="text" name="invoiceNum" id="" formControlName="invoiceNum">
           </div>
           <div class="col-lg-3 division">
@@ -18,13 +18,14 @@
           </div>
           <div class="col-lg-3 division">
             <label for="productName">Product Name</label><br>
-            <input id="product" list="products"  formControlName="productName" (ngModelChange)="mapSelectedProduct()">
+            <input id="product" list="products"  formControlName="productName" (change)="mapSelectedProduct()">
             <datalist id="products" >
-              <option [value]="product.productName+'_arr_'+i" *ngFor="let product of products; let i = index;">{{product.productName}}</option>
+              <option [value]="product.productName" *ngFor="let product of products;">{{product.productName}}</option>
              
             </datalist>
           </div>
-          <div class="col-lg-3 division"> <label for="datePurchase">Date of Purchase</label>
+          <div class="col-lg-3 division"> 
+            <label for="datePurchase">Date of Purchase</label><br>
             <input type="date" name="datePurchase" id="" formControlName="datePurchase">
           </div>
         </div>

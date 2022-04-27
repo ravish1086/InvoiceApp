@@ -1,5 +1,6 @@
 .title
 {
+    margin-left: 2%;
     font-weight: 800;
     font-size: 24px;
     color: white;
@@ -9,4 +10,15 @@
 {
     
     overflow-x: hidden;
+}
+.active-link
+{
+    background-color: #062c8d;
+    border-radius: 10px;
+    color: white;
+}
+a{
+    font-weight: 600;
+    padding: 7px;
+    margin: 2px;
 }

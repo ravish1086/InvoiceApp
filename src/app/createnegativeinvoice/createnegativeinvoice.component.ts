@@ -70,6 +70,11 @@ export class CreatenegativeinvoiceComponent implements OnInit {
     invoice.description=""
     this.invoiceView.push(invoice);
   }
+  deleteRow()
+  {
+  
+    this.invoiceView.pop()
+  }
 
   sendData()
   {

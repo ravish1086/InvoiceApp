@@ -49,34 +49,55 @@ export class HomeComponent implements OnInit {
     {
      
     }
-
+    populateFields(productName)
+    {
+      console.log(productName)
+      let i=0;
+      for(let j=0;j<this.products.length;j++)
+      {
+        if(this.products[j].productName === (productName))
+        {
+          console.log("match success")
+          console.log(this.products[i].productHsn);
+          i=j;
+          // let productIndex=j
+          this.selectedProductId=this.products[j].id
+          this.selectedProductQuantity=this.products[j].inStock
+         
+          this.productForm.controls['unit'].setValue(this.products[j].productUnit)
+          this.productForm.controls['rate'].setValue(this.products[j].productPrice)
+         console.log(this.productForm.controls['productName'].value)
+  console.log(productName)
+  console.log(this.selectedProductId)
+  console.log(this.selectedProductQuantity)
+  return;
+        }
+      }
+    }
       ngOnInit()
       {
-        if(this.otherdataservice.loadedProducts.length>0){
-          this.products=this.otherdataservice.loadedProducts;
-          }
-          else{
-              this.getSavedProducts();
-          }
-          if(this.otherdataservice.loadedSeller.length>0){
-          this.sellers=this.otherdataservice.loadedSeller;      
-          }
-            else{
-             this.getSellerDetails();
-          }
+        this.getSavedProducts();
+        this.getSellerDetails();
+        // if(this.otherdataservice.loadedProducts.length>0){
+        //   this.products=this.otherdataservice.loadedProducts;
+        //   }
+        //   else{
+        //       this.getSavedProducts();
+        //   }
+          // if(this.otherdataservice.loadedSeller.length>0){
+          // this.sellers=this.otherdataservice.loadedSeller;      
+          // }
+          //   else{
+          //    this.getSellerDetails();
+          // }
       }
       mapSelectedProduct()
       {
-        let productName=(this.productForm.controls['productName'].value).split('_arr_')[0];
-        let productIndex=(this.productForm.controls['productName'].value).split('_arr_')[1];
-        this.selectedProductId=this.products[productIndex].id
-        this.selectedProductQuantity=this.products[productIndex].inStock
-        // console.log(selectedID)
-        // this.selectedProductId=selectedID;
-      // console.log(this.productForm.controls['productName'].value)
-console.log(productName)
-console.log(this.selectedProductId)
-console.log(this.selectedProductQuantity)
+       
+        let productName=(this.productForm.controls['productName'].value);
+        // let productIndex=(this.productForm.controls['productName'].value).split('_arr_')[1];
+        // this.selectedProductId=(this.productForm.controls['productName'].value).split('_arr_')[2]
+      this.populateFields(productName)
 
       }
       onSubmit()
@@ -98,6 +119,7 @@ console.log(this.selectedProductQuantity)
                 },this.selectedProductId
               ).subscribe(response=>
                 {
+                  alert("Details Added Successfully")
                   console.log(response)
                 })
             }
@@ -138,6 +160,7 @@ console.log(this.selectedProductQuantity)
               product.productPrice=res[i].productPrice
               product.productTaxRate=res[i].productTaxRate
               product.productUnit=res[i].productUnit
+              // product.id=res[i].productId
               this.savedProducts.push(product);
             }
             this.products=this.savedProducts;

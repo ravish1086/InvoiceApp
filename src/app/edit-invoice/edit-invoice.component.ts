@@ -148,7 +148,13 @@ export class EditInvoiceComponent implements OnInit {
     invoice.rate="";
     invoice.amount="";
     invoice.quantity="";
+    invoice.description=""
     this.invoiceView.push(invoice);
+  }
+  deleteRow()
+  {
+  
+    this.invoiceView.pop()
   }
 
   sendData()

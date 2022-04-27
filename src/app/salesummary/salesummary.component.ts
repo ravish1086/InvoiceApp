@@ -16,13 +16,14 @@ export class SalesummaryComponent implements OnInit {
   b2csummary:B2CModel[]=[];
   startDate:Date;
   endDate:Date;
+summaryBackup;
   constructor(private invoiceService:InvoiceService,private router:Router) { }
 
   ngOnInit(): void {
     this.invoiceService.getAllInvoicesDetails().subscribe(res=>
       {
         this.summary=res;
-        
+        this.summaryBackup=res;
         //this.downloadCSVForB2B()
       })
 
@@ -47,16 +48,18 @@ export class SalesummaryComponent implements OnInit {
     useBom: true,
     headers: ["Type", "Place Of Supply", "Rate","Applicable % of Tax Rate","Taxable Value","Cess Amount","E-Commerce GSTIN"]
   };
- 
+ monthList=["Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sep","Oct","Nov","Dec"]
 downloadCSVForB2B()
 {
   this.generateB2BSummary();
-  new ngxCsv(this.b2bsummary, "Report", this.optionsb2b);
+  let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" + [(new Date(this.startDate).getFullYear())+1] + "_B2C_GSTR 1_3b";
+  new ngxCsv(this.b2bsummary, name, this.optionsb2b);
 }
 downloadCSVForB2C()
 {
   this.generateB2CSummary();
-  new ngxCsv(this.b2csummary, "Report", this.optionsb2c);
+  let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" +[new Date(this.startDate).getFullYear()+1] + "_B2B_GSTR 1_3b";
+  new ngxCsv(this.b2csummary, name, this.optionsb2c);
 }
   editInvoice(id)
   {
@@ -71,22 +74,28 @@ downloadCSVForB2C()
 
   filterRecords()
   {
+    this.summary=this.summaryBackup
     var filteredSummary=[];
     var summary=this.summary
-    var invdate=new Date(summary[0].invoiceDate);
-    var startdate=new Date(this.startDate)
-    var enddate=new Date(this.endDate)
-    console.log(invdate)
-    console.log(this.startDate)
+    // var invdate=new Date(summary[0].invoiceDate);
+    var startdate=new Date(this.startDate).setHours(0,0,0,0)
+    var enddate=new Date(this.endDate).setHours(0,0,0,0)
+    
+    // console.log(startdate)
+    // console.log(enddate)
 
-    console.log(new Date(this.endDate))
-    console.log(new Date(this.startDate)<invdate)
-    console.log(this.endDate>invdate)
+    // console.log(startdate>new Date())
 
     for(let i=0;i<summary.length;i++)
     {
-     let date=new Date(summary[i].invoiceDate);
-      if(date>startdate && date<enddate)
+     let date=new Date(summary[i].invoiceDate).setHours(0,0,0,0);
+    //  console.log(date)
+    console.log( date.valueOf() == startdate.valueOf()) 
+    console.log(date)
+    console.log(startdate)
+    // console.log(date>startdate )
+     
+      if((date>startdate || date.valueOf() == startdate.valueOf()) && (date<enddate || date.valueOf() == enddate.valueOf()))
       {
         filteredSummary.push(summary[i]);
       }

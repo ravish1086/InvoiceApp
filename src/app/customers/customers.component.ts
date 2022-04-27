@@ -3,6 +3,8 @@ import { CustomerModel } from '../models/customer.model';
 
 import { OtherdataService } from '../services/otherdata.service';
 import * as XLSX from 'xlsx';
+import { isNull } from '@angular/compiler/src/output/output_ast';
+import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-customers',
@@ -30,7 +32,12 @@ addCustomerForm=false;
   ngOnInit(): void {
     this.getcustomerDetails();
   }
-
+  searchCustomer(inputStr:string)
+  {
+    this.savedCustomers=this.otherdataservice.loadedCustomers
+    this.savedCustomers=this.savedCustomers.filter(product=> (product.customerName).toLowerCase().includes((inputStr).toLowerCase()) )
+    
+  }
   addCustomer()
   {
     let customer=new CustomerModel();
@@ -47,6 +54,13 @@ addCustomerForm=false;
           this.otherdataservice.addCustomerToDb(customer).subscribe(res=>
             {
               console.log(res);
+              // console.log(res==customer)
+              // console.log(res.status)
+              if(!isNullOrUndefined(res))
+              {
+                alert("Customer has been added Successfully");
+                this.savedCustomers.push(customer)
+              }
             })
   }
   showForm()

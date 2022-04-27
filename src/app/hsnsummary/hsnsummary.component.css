@@ -6,3 +6,14 @@
 {
     background-color: white;
 }
+input{
+    border-radius: 5px;
+    border-color: #0d6efd!important;
+    border: 1px solid;
+}
+select
+{
+    border-radius: 5px;
+    border-color: #0d6efd!important;
+    border: 1px solid;
+}

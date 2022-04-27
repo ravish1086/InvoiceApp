@@ -18,6 +18,11 @@ import { SellerDetailsComponent } from './seller-details/seller-details.componen
 
 const routes: Routes = [
   {
+    path:'',
+    redirectTo:'createInvoice',
+    pathMatch:'full'
+  },
+  {
     path:'home',
     component:HomeComponent
   },
@@ -73,7 +78,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

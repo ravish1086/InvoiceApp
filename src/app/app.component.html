@@ -2,38 +2,38 @@
   <nav class="navbar navbar-dark bg-primary" id="nav-div">
     <!-- Navbar content -->
     <span class="title"> {{title}} </span>
-    <span><button value="Screenshot" (click)="capture()">Screenshot</button></span>
+    <span style="padding-right: 2%; cursor: pointer;"><img height="35px" width="35px" src="./assets/img/screenshot.png" (click)="capture()"></span>
   </nav>
   <ul class="nav justify-content-center" id="ul-div">
     <li class="nav-item">
-      <a class="nav-link active" routerLink="home">Home</a>
+      <a class="nav-link active" routerLink="home" routerLinkActive="active-link">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="addedStockEntries">All Stock Entries</a>
+      <a class="nav-link" routerLink="addedStockEntries" routerLinkActive="active-link">All Stock Entries</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="sellerdetails">Seller Details</a>
+      <a class="nav-link" routerLink="sellerdetails" routerLinkActive="active-link">Seller Details</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " routerLink="productdetails">Product Details</a>
+      <a class="nav-link " routerLink="productdetails" routerLinkActive="active-link">Product Details</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " routerLink="createInvoice">Create Invoice</a>
+      <a class="nav-link " routerLink="createInvoice" routerLinkActive="active-link">Create Invoice</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link " routerLink="customers">Customers</a>
+      <a class="nav-link " routerLink="customers" routerLinkActive="active-link">Customers</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="saleSummary">Sales Summary</a>
+      <a class="nav-link" routerLink="saleSummary" routerLinkActive="active-link">Sales Summary</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="hsnSummary">HSN Summary</a>
+      <a class="nav-link" routerLink="hsnSummary" routerLinkActive="active-link">HSN Summary</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="createNegativeInvoice">Create Negative Invoice</a>
+      <a class="nav-link" routerLink="createNegativeInvoice" routerLinkActive="active-link">Create Negative Invoice</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" routerLink="payments">Payments</a>
+      <a class="nav-link" routerLink="payments" routerLinkActive="active-link">Payments</a>
     </li>
     
   </ul>
@@ -44,5 +44,5 @@
 </div>
 <div  id="screenshot-div">
   <a class="view-btn-attach" *ngIf="show" [href]="selectedFileBLOB" target="_blank">View</a>
-  <!-- <img  src="../../src/assets/screenshot.png"> -->
+ 
 </div>

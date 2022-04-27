@@ -11,12 +11,76 @@
       </tbody>
   </table>
   
-  <div>
-    <img src="../../assets/img/add.jpg" alt="" (click)="showForm()" style="height: 30px; width: 30px;">
+  <div style="display: inline-block;">
+    <img src="../../assets/img/add.jpg" alt="" (click)="showForm()" style="height: 30px; width: 30px;"> 
+  </div>
+  <div style="float: right;">
+    <input type="text" name="searchKeyword" placeholder="Search Keyword" id="" #str (keyup)="searchCustomer(str.value)"> <img src="../../assets/img/icons8-search.gif" height="35px" width="35px" alt="">
   </div>
   
+  <div class="my-modal" *ngIf="addCustomerForm">
+    <div class="my-modal-content">
+      <span style="font-weight:  600; float: right; margin-top: -50px; color: black; font-size: 18px; cursor: pointer;" (click)="showForm()">X</span>
+      <div style="padding:1%;" >
+        <div class="addProducts" >
+    
+          <div class="row">
+            <div class="col-lg-3">Customer Name</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="name"></div>
+            <div class="col-lg-3">Customer GST</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="gst"></div>
+           
+          </div>
+          <div class="row">
+            <div class="col-lg-3">Customer PAN</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="pan"></div>
+            <div class="col-lg-3">Customer Contact</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="contact"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">Customer Address</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="address"></div>
+            <div class="col-lg-3">Customer Shop No</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="shopno"></div>
+          
+          </div>
+          <div class="row">
+            <div class="col-lg-3">Customer Area</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="area"></div>
+            <div class="col-lg-3">Customer City</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="city"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">Customer State</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="state"></div>
+            <div class="col-lg-3">Customer Country</div>
+            <div class="col-lg-3"><input type="text" name="" id="" [(ngModel)]="country"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2">&nbsp;</div>
+            
+            <div class="col-lg-3"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-lg-2"></div>
+          </div>
+     
+          
+        </div>
+        <div class="row" >
+      
+          <div class="col-lg-3"></div>
+          <div class="col-lg-2"></div>
+          
+          <div class="col-lg-3"></div>
+          <div class="col-lg-2"></div>
+          <div class="col-lg-2" style="text-align: right; padding-right: 5%;"><button class="btn-primary" (click)="addCustomer()">Add Customer</button></div>
+        </div>
+      </div>
+    </div>
+    </div>
   
-  <div class="addProducts" *ngIf="addCustomerForm">
+  <!-- <div class="addProducts" *ngIf="addCustomerForm">
   
     <div class="row">
       <div class="col-lg-3">Customer Name</div>
@@ -67,7 +131,7 @@
       <div class="col-lg-2"><button class="btn-primary" (click)="addCustomer()">Add Product</button></div>
     </div>
     
-  </div>
+  </div> -->
 
 
   <div class="container">

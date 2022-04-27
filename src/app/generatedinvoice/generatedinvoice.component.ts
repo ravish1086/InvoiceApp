@@ -1,17 +1,20 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import jsPDF from 'jspdf';
 import { isNullOrUndefined } from 'util';
 
 import { InvoiceService } from '../services/invoice.service';
 import { OtherdataService } from '../services/otherdata.service';
-
+// import * as jsPDF from 'jspdf'; 
 @Component({
   selector: 'app-generatedinvoice',
   templateUrl: './generatedinvoice.component.html',
   styleUrls: ['./generatedinvoice.component.css']
 })
 export class GeneratedinvoiceComponent implements OnInit {
+  
+ @ViewChild('sectionToPrint',{static:true}) sectionToPrint:ElementRef;  
   generatedInvoice;
   gstin;
   companyName;
@@ -29,7 +32,44 @@ export class GeneratedinvoiceComponent implements OnInit {
   balancerows=[];
   invoiceNum;
   invoiceType="Original";
+  public SavePDF(): void {  
+    let content=this.sectionToPrint.nativeElement;  
+    let doc = new jsPDF();  
+
+    // let _elementHandlers =  
+    // {  
+    //   '#editor':function(element,renderer){  
+    //     return true;  
+    //   }  
+    // };  
+     doc = new jsPDF('p', 'px', 'a4')
+  //   doc.html(content, {
+  //     html2canvas: {
+  //         scale: 1,
+  //     },
+  //     x: 0,
+  //     y: 0,
+  //     width:1366,
+  //     callback: function (doc) {
+  //         window.open(doc.output('bloburl'));
+  //     }
+  // });
+    // doc.save("abc.pdf")
+    // ({
+    //   orientation: "landscape",
+    //   unit: "in",
+    //   format: [4, 2]
+    // });
+    // doc.h(content.innerHTML,15,15,{  
+  
+    //   'width':1366,  
+    //   'elementHandlers':_elementHandlers  
+    // });  
+  
+    // doc.save('test.pdf');  
+  } 
   onPrintO(divName) {
+    this.SavePDF()
     console.log("print Method Called");
     //this.invoiceType="Original";
     (document.getElementById('nav-div') as HTMLFormElement).style.display="none";
@@ -80,7 +120,7 @@ toggleOD(type)
         console.log(params)
       
    //var invoiceNum=2;
-    this.generatedInvoice=this.invoiceService.getInvoiceDetails(this.invoiceNum).subscribe(res=>
+    this.invoiceService.getInvoiceDetails(this.invoiceNum).subscribe(res=>
       {
         this.generatedInvoice=res;
         console.log(this.generatedInvoice);
@@ -110,7 +150,7 @@ toggleOD(type)
           this.area=this.otherDataService.appConfig.area
           this.pan=this.otherDataService.appConfig.pan
         });
-
+        
       })
       
   }

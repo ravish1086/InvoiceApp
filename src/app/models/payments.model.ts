@@ -6,4 +6,5 @@ export class ReceivedPayments
     amountReceived;
     modeofPayment;
     paymentDetails; 
+    lastFYBalance;
 }

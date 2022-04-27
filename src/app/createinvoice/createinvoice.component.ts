@@ -73,6 +73,19 @@ export class CreateinvoiceComponent implements OnInit {
     invoice.description=""
     this.invoiceView.push(invoice);
   }
+  deleteRow()
+  {
+    // var invoice=new Invoice();
+    // invoice.productId=0;
+    // invoice.productName="";
+    // invoice.hsn="";
+    // invoice.taxRate="";
+    // invoice.rate="";
+    // invoice.amount="";
+    // invoice.quantity="";
+    // invoice.description=""
+    this.invoiceView.pop()
+  }
 
   sendData()
   {

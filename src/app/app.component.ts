@@ -11,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class AppComponent {
   @ViewChild('screen', { static: true }) screen: any;
-  title = 'StockApp';
+  title = 'EZInvoice';
 show=false;
   selectedFileBLOB: any;
   constructor(private _sanitizer: DomSanitizer,private otherdataservice:OtherdataService,private captureService:NgxCaptureService)
@@ -36,8 +36,8 @@ this.captureService.getImage(this.screen.nativeElement, true).pipe(
     let url = window.URL.createObjectURL(this.imagePath);
 
     this.selectedFileBLOB = this._sanitizer.bypassSecurityTrustUrl(url);
-
-    this.show=true;
+    // window.open(this.selectedFileBLOB,"#")
+     this.show=true;
   })
 ).subscribe();
     

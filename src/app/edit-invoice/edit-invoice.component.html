@@ -85,25 +85,25 @@
             </datalist>
             
         </div>
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" name="{{invoice.unit}}" id="id3" [(ngModel)]="invoice.unit">
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" name="{{invoice.unit}}" id="id3" [(ngModel)]="invoice.unit" disabled>
         </div>
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" name="{{invoice.hsn}}" id="id3" [(ngModel)]="invoice.hsn">
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" name="{{invoice.hsn}}" id="id3" [(ngModel)]="invoice.hsn" disabled>
         </div>
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.taxRate" name="{{invoice.taxRate}}"
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.taxRate" name="{{invoice.taxRate}}" disabled
                 id="id4"></div>
         <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.quantity" name="{{invoice.quantity}}"
                 id="id5" (keyup)="calculateAmount(i)"></div>
         <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.rate" name="{{invoice.rate}}" id="id6" (keyup)="calculateAmount(i)">
         </div>
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.sgst" name="{{invoice.sgst}}" id="id8">
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.sgst" name="{{invoice.sgst}}" id="id8" disabled>
         </div>
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.cgst" name="{{invoice.cgst}}" id="id9">
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.cgst" name="{{invoice.cgst}}" id="id9" disabled>
         </div>
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head" *ngIf="interstate"><input type="text" [(ngModel)]="invoice.Igst" name="{{invoice.Igst}}" id="id9">
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head" *ngIf="interstate"><input type="text" [(ngModel)]="invoice.Igst" name="{{invoice.Igst}}" id="id9" disabled>
         </div>
         
 
-        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.amount" name="{{invoice.amount}}"
+        <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" [(ngModel)]="invoice.amount" name="{{invoice.amount}}" disabled
                 id="id7"></div>
     </div>
     </div>

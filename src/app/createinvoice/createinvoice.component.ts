@@ -247,6 +247,7 @@ export class CreateinvoiceComponent implements OnInit {
     generateInvoice.customer=this.customer
     generateInvoice.products=this.invoiceView;
     generateInvoice.invoiceStatus="valid";
+    generateInvoice.invoiceType="product";
     console.log(generateInvoice);
     this.invoiceservice.generateInvoice(generateInvoice).subscribe(res=>
       {

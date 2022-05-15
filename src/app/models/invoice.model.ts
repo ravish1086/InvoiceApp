@@ -43,5 +43,6 @@ export class GenerateInvoice
     invoiceStatus;
     customer:CustomerModel;
     products:Invoice[];
+    invoiceType:string;
 
 }

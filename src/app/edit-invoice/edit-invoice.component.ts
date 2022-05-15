@@ -57,7 +57,7 @@ export class EditInvoiceComponent implements OnInit {
   balancerow=40;
   balancerows=[];
   invoiceNum;
-
+invoiceType=""
   onPrint(divName) {
     const printContents = document.getElementById(divName).innerHTML;
     const originalContents = document.body.innerHTML;
@@ -105,6 +105,7 @@ export class EditInvoiceComponent implements OnInit {
             this.totalTax=this.generatedInvoice.taxAmtsgstorcgst5+this.generatedInvoice.taxAmtsgstorcgst12+this.generatedInvoice.taxAmtsgstorcgst18+this.generatedInvoice.taxAmtsgstorcgst28
             this.totalTaxableValue=this.generatedInvoice.totalTaxableValue
             this.totalInvoiceValue=this.generatedInvoice.totalInvoiceValue
+            this.invoiceType=this.generatedInvoice.invoiceType
             this.populateCustomerFields(this.generatedInvoice.customer.customerName)
           });
     
@@ -315,6 +316,7 @@ export class EditInvoiceComponent implements OnInit {
     generateInvoice.customer=this.customer
     generateInvoice.products=this.invoiceView;
     generateInvoice.invoiceStatus="valid";
+    this.generatedInvoice.invoiceType=this.invoiceType
     console.log(generateInvoice);
     let id=this.generatedInvoice.id;
     this.invoiceservice.updateInvoice(generateInvoice,id).subscribe(res=>

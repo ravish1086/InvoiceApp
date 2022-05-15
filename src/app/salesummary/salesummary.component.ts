@@ -48,18 +48,51 @@ summaryBackup;
     useBom: true,
     headers: ["Type", "Place Of Supply", "Rate","Applicable % of Tax Rate","Taxable Value","Cess Amount","E-Commerce GSTIN"]
   };
+  optionsSummary = { 
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: true, 
+    showTitle: false,
+    title: '',
+    useBom: true,
+    headers: ["Name", "GSTIN", "State of Supply","Invoice Number","Date","Invoice Value","Taxable Value","CGST AMT","SGST AMT","Total Tax"]
+  };
  monthList=["Jan","Feb","Mar","Apr","May","Jun","July","Aug","Sep","Oct","Nov","Dec"]
 downloadCSVForB2B()
 {
   this.generateB2BSummary();
-  let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" + [(new Date(this.startDate).getFullYear())+1] + "_B2C_GSTR 1_3b";
+  let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" + [(new Date(this.startDate).getFullYear())+1] + "_B2B_GSTR 1_3b";
   new ngxCsv(this.b2bsummary, name, this.optionsb2b);
 }
 downloadCSVForB2C()
 {
   this.generateB2CSummary();
-  let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" +[new Date(this.startDate).getFullYear()+1] + "_B2B_GSTR 1_3b";
+  let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" +[new Date(this.startDate).getFullYear()+1] + "_B2C_GSTR 1_3b";
   new ngxCsv(this.b2csummary, name, this.optionsb2c);
+}
+downloadCSVCurrentReport()
+{
+  // this.generateB2CSummary();
+  // let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" +[new Date(this.startDate).getFullYear()+1] + "_B2C_GSTR 1_3b";
+  let summaryForExcel=[]
+  for(let i=0;i<this.summary.length;i++)
+  {
+    let obj={
+      "Name":this.summary[i].customer.customerName,
+      "GSTIN":this.summary[i].customer.customerGst,
+      "State Of Supply":this.summary[i].customer.customerState,
+      "Invoice Number":this.summary[i].invoiceNo,
+      "Date":this.summary[i].invoiceDate,
+      "Invoice Value":this.summary[i].totalInvoiceValue,
+      "Taxable Value":this.summary[i].totalTaxableValue,
+      "CSGT Amount":(this.summary[i].taxAmtsgstorcgst5+this.summary[i].taxAmtsgstorcgst12+this.summary[i].taxAmtsgstorcgst18+this.summary[i].taxAmtsgstorcgst28),
+      "SGST Amount":(this.summary[i].taxAmtsgstorcgst5+this.summary[i].taxAmtsgstorcgst12+this.summary[i].taxAmtsgstorcgst18+this.summary[i].taxAmtsgstorcgst28),
+      "Total Tax":(this.summary[i].taxAmtsgstorcgst5+this.summary[i].taxAmtsgstorcgst12+this.summary[i].taxAmtsgstorcgst18+this.summary[i].taxAmtsgstorcgst28+this.summary[i].taxAmtsgstorcgst5+this.summary[i].taxAmtsgstorcgst12+this.summary[i].taxAmtsgstorcgst18+this.summary[i].taxAmtsgstorcgst28+this.summary[i].taxAmtIgst5+this.summary[i].taxAmtIgst12+this.summary[i].taxAmtIgst18+this.summary[i].taxAmtIgst28)
+    }
+    summaryForExcel.push(obj)
+  }
+  new ngxCsv(summaryForExcel, "Report", this.optionsSummary);
 }
   editInvoice(id)
   {
@@ -187,7 +220,7 @@ downloadCSVForB2C()
           rowData.name=this.summary[i].customer.customerName;
           rowData.invoiceNumber=this.summary[i].invoiceNo;
           rowData.invoiceDate= this.converDateToDDMMMYYYY(this.summary[i].invoiceDate);
-          rowData.invoiceValue=this.summary[i].totalInvoiceValue;
+          rowData.invoiceValue=this.summary[i].totalInvoiceValue.toFixed(0);
           rowData.placeOfSupply="09-"+this.summary[i].placeOfSupply;
           rowData.reverseCharge=this.summary[i].reverseCharge
           rowData.applicableTaxRate=""
@@ -201,7 +234,7 @@ downloadCSVForB2C()
           rowData.name=this.summary[i].customer.customerName;
           rowData.invoiceNumber=this.summary[i].invoiceNo;
           rowData.invoiceDate= this.converDateToDDMMMYYYY(this.summary[i].invoiceDate);
-          rowData.invoiceValue=this.summary[i].totalInvoiceValue;
+          rowData.invoiceValue=this.summary[i].totalInvoiceValue.toFixed(0);
           rowData.placeOfSupply="09-"+this.summary[i].placeOfSupply;
           rowData.reverseCharge=this.summary[i].reverseCharge
           rowData.applicableTaxRate=""
@@ -220,7 +253,7 @@ downloadCSVForB2C()
           rowData.name=this.summary[i].customer.customerName;
           rowData.invoiceNumber=this.summary[i].invoiceNo;
           rowData.invoiceDate= this.converDateToDDMMMYYYY(this.summary[i].invoiceDate);
-          rowData.invoiceValue=this.summary[i].totalInvoiceValue;
+          rowData.invoiceValue=this.summary[i].totalInvoiceValue.toFixed(0);
           rowData.placeOfSupply="09-"+this.summary[i].placeOfSupply;
           rowData.reverseCharge=this.summary[i].reverseCharge
           rowData.applicableTaxRate=""
@@ -239,7 +272,7 @@ downloadCSVForB2C()
           rowData.name=this.summary[i].customer.customerName;
           rowData.invoiceNumber=this.summary[i].invoiceNo;
           rowData.invoiceDate= this.converDateToDDMMMYYYY(this.summary[i].invoiceDate);
-          rowData.invoiceValue=this.summary[i].totalInvoiceValue;
+          rowData.invoiceValue=this.summary[i].totalInvoiceValue.toFixed(0);
           rowData.placeOfSupply="09-"+this.summary[i].placeOfSupply;
           rowData.reverseCharge=this.summary[i].reverseCharge
           rowData.applicableTaxRate=""
@@ -258,7 +291,7 @@ downloadCSVForB2C()
           rowData.name=this.summary[i].customer.customerName;
           rowData.invoiceNumber=this.summary[i].invoiceNo;
           rowData.invoiceDate= this.converDateToDDMMMYYYY(this.summary[i].invoiceDate);
-          rowData.invoiceValue=this.summary[i].totalInvoiceValue;
+          rowData.invoiceValue=this.summary[i].totalInvoiceValue.toFixed(0);
           rowData.placeOfSupply="09-"+this.summary[i].placeOfSupply;
           rowData.reverseCharge=this.summary[i].reverseCharge
           rowData.applicableTaxRate=""

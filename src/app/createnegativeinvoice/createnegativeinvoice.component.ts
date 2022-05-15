@@ -233,6 +233,7 @@ export class CreatenegativeinvoiceComponent implements OnInit {
     generateInvoice.customer=this.customer
     generateInvoice.products=this.invoiceView;
     generateInvoice.invoiceStatus="valid";
+    generateInvoice.invoiceType="negative"
     console.log(generateInvoice);
     this.invoiceservice.generateInvoice(generateInvoice).subscribe(res=>
       {

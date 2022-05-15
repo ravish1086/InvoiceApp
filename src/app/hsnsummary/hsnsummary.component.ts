@@ -94,6 +94,9 @@ export class HsnsummaryComponent implements OnInit {
     }, {
       "num": "2905",
       "uqc": "LTR-LITRES"
+    }, {
+      "num": "4806",
+      "uqc": "PAC-PACKS"
     }
   ]
   constructor(private hsnservice:HsnService) { }
@@ -110,19 +113,19 @@ export class HsnsummaryComponent implements OnInit {
     var filteredSummary=[];
     var summary=this.allinvoicesdetails
     var invdate=new Date(summary[0].invoiceDate);
-    var startdate=new Date(this.startDate)
-    var enddate=new Date(this.endDate)
+    var startdate=new Date(this.startDate).setHours(0,0,0,0)
+    var enddate=new Date(this.endDate).setHours(0,0,0,0)
     console.log(invdate)
     console.log(this.startDate)
 
     console.log(new Date(this.endDate))
     console.log(new Date(this.startDate)<invdate)
     console.log(this.endDate>invdate)
-
+console.log(summary)
     for(let i=0;i<summary.length;i++)
     {
-     let date=new Date(summary[i].invoiceDate);
-      if(date>startdate && date<enddate)
+     let date=new Date(summary[i].invoiceDate).setHours(0,0,0,0);
+      if((date>startdate || date.valueOf() == startdate.valueOf()) && (date<enddate || date.valueOf() == enddate.valueOf()))
       {
         filteredSummary.push(summary[i]);
       }

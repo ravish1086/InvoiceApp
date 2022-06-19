@@ -198,6 +198,12 @@ export class CreateinvoiceComponent implements OnInit {
         this.invoiceView[indexofItemList].rate=this.products[i].productPrice
         this.invoiceView[indexofItemList].taxRate=this.products[i].productTaxRate
         this.invoiceView[indexofItemList].unit=this.products[i].productUnit
+        this.invoiceView[indexofItemList].Igst=""
+        this.invoiceView[indexofItemList].amount=""
+        this.invoiceView[indexofItemList].cgst=""
+        this.invoiceView[indexofItemList].sgst=""
+        this.invoiceView[indexofItemList].quantity=""
+        this.invoiceView[indexofItemList].amount=""
         console.log(this.invoiceView[indexofItemList])
     }
     populateCustomerFields(customerGst)

@@ -17,11 +17,11 @@ export class B2BModel
 
 export class B2CModel
 {
-    type;
-    placeofsupply;
-    rate;
-    applicabletaxrate;
-    taxablevalue;
-    cessamount;
-    ecomGstin;
+    type="";
+    placeofsupply="";
+    rate="";
+    applicabletaxrate="";
+    taxablevalue=0;
+    cessamount="";
+    ecomGstin="";
 }

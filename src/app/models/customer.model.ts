@@ -10,4 +10,5 @@ export class CustomerModel
     customerCountry:string;
     customershopNo:string;
     customerArea:string;
+    id:number;
 }

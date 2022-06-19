@@ -57,14 +57,14 @@ export class OtherdataService {
   saveProducts(reqJson,index:number):Observable<any>
   {
   console.log(index);
-  let id=Number(index+1)
-   return this.http.put(environment.apiurl+"/productdetails/"+id,reqJson).pipe(catchError(this.handleError));
+
+   return this.http.put(environment.apiurl+"/productdetails/"+index,reqJson).pipe(catchError(this.handleError));
   }
   saveCustomer(reqJson,index:number):Observable<any>
   {
   console.log(index);
-  let id=Number(index+1)
-   return this.http.put(environment.apiurl+"/customerdetails/"+id,reqJson).pipe(catchError(this.handleError));
+ 
+   return this.http.put(environment.apiurl+"/customerdetails/"+index,reqJson).pipe(catchError(this.handleError));
   }
   addProducttoDb(reqJson):Observable<any>
   {

@@ -80,6 +80,7 @@ addCustomerForm=false;
             customer.customerPan=res[i].customerPan
             customer.customerContact=res[i].customerContact
             customer.customerAddress=res[i].customerAddress
+            customer.id=res[i].id
             this.savedCustomers.push(customer);
           }
           
@@ -171,7 +172,7 @@ SaveRecords(entry,index:number)
  {
   element2[j].style.display='block';
  }
-  this.otherdataservice.saveCustomer(entry,index).subscribe(res=>
+  this.otherdataservice.saveCustomer(entry,entry.id).subscribe(res=>
     {
       console.log(res);
     })

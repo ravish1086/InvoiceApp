@@ -63,7 +63,7 @@ export class AddedproductsComponent implements OnInit {
     for (let j = index * 6; j < index * 6 + 6; j++) {
       element2[j].style.display = 'block';
     }
-    this.otherdataservice.saveProducts(entry, index).subscribe((res) => {
+    this.otherdataservice.saveProducts(entry, entry.id).subscribe((res) => {
       console.log(res);
     });
   }
@@ -83,6 +83,7 @@ export class AddedproductsComponent implements OnInit {
         product.productTaxRate = res[i].productTaxRate;
         product.productUnit = res[i].productUnit;
         product.inStock = res[i].inStock;
+        product.id=res[i].id
         this.savedProducts.push(product);
       }
       // this.parentArray=this.savedProducts

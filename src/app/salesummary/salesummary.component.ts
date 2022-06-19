@@ -84,7 +84,7 @@ downloadCSVCurrentReport()
       "State Of Supply":this.summary[i].customer.customerState,
       "Invoice Number":this.summary[i].invoiceNo,
       "Date":this.summary[i].invoiceDate,
-      "Invoice Value":this.summary[i].totalInvoiceValue,
+      "Invoice Value":this.summary[i].totalInvoiceValue.toFixed(0),
       "Taxable Value":this.summary[i].totalTaxableValue,
       "CSGT Amount":(this.summary[i].taxAmtsgstorcgst5+this.summary[i].taxAmtsgstorcgst12+this.summary[i].taxAmtsgstorcgst18+this.summary[i].taxAmtsgstorcgst28),
       "SGST Amount":(this.summary[i].taxAmtsgstorcgst5+this.summary[i].taxAmtsgstorcgst12+this.summary[i].taxAmtsgstorcgst18+this.summary[i].taxAmtsgstorcgst28),
@@ -138,12 +138,17 @@ downloadCSVCurrentReport()
     console.log(this.summary)
 
   }
+  
   generateB2CSummary()
   {
     let  rowData5=new B2CModel();
     let  rowData12=new B2CModel();
     let  rowData18=new B2CModel();
     let  rowData28=new B2CModel();
+    // rowData5.taxablevalue=0
+    // rowData12.taxablevalue=0
+    // rowData18.taxablevalue=0
+    // rowData28.taxablevalue=0
     for(let i=0;i<this.summary.length;i++){
 
       if(this.summary[i].customer.customerGst=="" || isNullOrUndefined(this.summary[i].customer.customerGst)){
@@ -158,7 +163,7 @@ downloadCSVCurrentReport()
           rowData5.placeofsupply="09-"+this.summary[i].placeOfSupply;
           rowData5.rate="5";
           rowData5.applicabletaxrate="";
-          rowData5.taxablevalue=Number(this.summary[i].taxable5)
+          rowData5.taxablevalue=Number(this.summary[i].taxable5)+Number(rowData5.taxablevalue)
           rowData5.cessamount=""
           rowData5.ecomGstin=""
         
@@ -170,7 +175,7 @@ downloadCSVCurrentReport()
           rowData12.placeofsupply="09-"+this.summary[i].placeOfSupply;
           rowData12.rate="12";
           rowData12.applicabletaxrate="";
-          rowData12.taxablevalue=Number(this.summary[i].taxable12)
+          rowData12.taxablevalue=Number(this.summary[i].taxable12)+Number(rowData12.taxablevalue)
           rowData12.cessamount=""
           rowData12.ecomGstin=""
          
@@ -181,7 +186,7 @@ downloadCSVCurrentReport()
           rowData18.placeofsupply="09-"+this.summary[i].placeOfSupply;
           rowData18.rate="18";
           rowData18.applicabletaxrate="";
-          rowData18.taxablevalue=Number(this.summary[i].taxable18)
+          rowData18.taxablevalue=Number(this.summary[i].taxable18)+Number(rowData18.taxablevalue)
           rowData18.cessamount=""
           rowData18.ecomGstin=""
         }
@@ -191,7 +196,7 @@ downloadCSVCurrentReport()
           rowData28.placeofsupply="09-"+this.summary[i].placeOfSupply;
           rowData28.rate="28";
           rowData28.applicabletaxrate="";
-          rowData28.taxablevalue=Number(this.summary[i].taxable28)
+          rowData28.taxablevalue=Number(this.summary[i].taxable28)+Number(rowData28.taxablevalue)
           rowData28.cessamount=""
           rowData28.ecomGstin=""
         }

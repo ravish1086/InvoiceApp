@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-3 div-head">Invoice No.</div>
-        <div class="col-lg-3 div-head">{{invoiceNumber}}</div>
+        <div class="col-lg-3 div-head"><input type="number" name="invoiceNumber" [(ngModel)]="invoiceNumber" id=""></div>
         <div class="col-lg-3 div-head">Place of Supply</div>
         <div class="col-lg-3 div-head">
             {{customer.customerState}}
@@ -10,7 +10,7 @@
     </div>
     <div class="row">
         <div class="col-lg-3 div-head">Invoice Date</div>
-        <div class="col-lg-3 div-head">{{todaysDate | date:'dd-MMM-yyyy'}}</div>
+        <div class="col-lg-3 div-head"><input type="date" name="todaysDate" [(ngModel)]="todaysDate" id=""> | {{todaysDate | date:'dd-MMM-yyyy'}}</div>
         <div class="col-lg-3 div-head">Reverse Charge</div>
         <div class="col-lg-3 div-head">{{reverseCharge}}</div>
     </div>

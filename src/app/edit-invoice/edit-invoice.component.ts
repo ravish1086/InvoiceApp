@@ -106,6 +106,10 @@ invoiceType=""
             this.totalTaxableValue=this.generatedInvoice.totalTaxableValue
             this.totalInvoiceValue=this.generatedInvoice.totalInvoiceValue
             this.invoiceType=this.generatedInvoice.invoiceType
+            this.taxable12=this.generatedInvoice.taxable12
+            this.taxable5=this.generatedInvoice.taxable5
+            this.taxable18=this.generatedInvoice.taxable18
+            this.taxable28=this.generatedInvoice.taxable28
             this.populateCustomerFields(this.generatedInvoice.customer.customerName)
           });
     
@@ -155,7 +159,8 @@ invoiceType=""
   deleteRow()
   {
   
-    this.invoiceView.pop()
+    this.invoiceView.pop();
+    this.calculateAmount(this.invoiceView.length -1);
   }
 
   sendData()
@@ -324,7 +329,8 @@ invoiceType=""
     generateInvoice.customer=this.customer
     generateInvoice.products=this.invoiceView;
     generateInvoice.invoiceStatus="valid";
-    this.generatedInvoice.invoiceType=this.invoiceType
+    generateInvoice.invoiceType=this.invoiceType
+    // this.generatedInvoice.invoiceType=this.invoiceType
     console.log(generateInvoice);
     let id=this.generatedInvoice.id;
     this.invoiceservice.updateInvoice(generateInvoice,id).subscribe(res=>

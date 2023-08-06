@@ -1,24 +1,29 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { OtherdataService } from './services/otherdata.service';
 import { NgxCaptureService } from 'ngx-capture';
 import { tap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
+import { data } from './data';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   @ViewChild('screen', { static: true }) screen: any;
   title = 'EZInvoice';
 show=false;
   selectedFileBLOB: any;
   constructor(private _sanitizer: DomSanitizer,private otherdataservice:OtherdataService,private captureService:NgxCaptureService)
   {
-    
+  
   }
   imagePath;
+  ngOnInit()
+  {
+    // this.debugggingIssue()
+  }
   capture()
   {
 this.captureService.getImage(this.screen.nativeElement, true).pipe(
@@ -55,6 +60,24 @@ this.captureService.getImage(this.screen.nativeElement, true).pipe(
         return new Blob([ia],{type:mimeString})
 }
 
-
+    debugggingIssue()
+    {
+      let dataobj = data;
+      let debuggableArray=[]
+      dataobj.forEach(obj => {
+        let sum=0
+        obj.products.forEach(obj=>{
+          sum = sum+Number(obj.taxableAmount);
+        })
+        let myobj = {
+          invNum: obj.invoiceNo,
+          taxableValue:obj.totalTaxableValue,
+          invoiceValue:obj.totalInvoiceValue,
+          hsnTaxableAmount:sum
+        }
+        debuggableArray.push(myobj)
+      });
+      console.log(debuggableArray)
+    }
 
 }

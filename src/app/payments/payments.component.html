@@ -1,8 +1,8 @@
-<div style="zoom: 90%; background-color: rgb(235,235,235);">
+<div style="zoom: 90%; padding: 2px 20px;" id="paymentForm">
     <div class="row">
         <div class="col-lg-3 col-sm-3 col-md-3">Customer Name</div>
-        <div class="col-lg-3 col-sm-3 col-md-3">
-                <select name="" id=""   [(ngModel)]="customerNameIndex" >
+        <div class="col-lg-3 col-sm-3 col-md-3 ">
+                <select name="" id="" style="width: 84%;"   [(ngModel)]="customerNameIndex" >
                     <option value="{{i}}" *ngFor="let customer of customerList; let i=index;">{{customer.customerName}}</option>
                 </select>
             </div>
@@ -27,24 +27,30 @@
     </div>
 </div>
 
-<div style="zoom: 90%; border-top: 1px solid gray; padding-top: 5px; padding-bottom: 5px; border-bottom: 1px solid gray; background-color: #0d6efd!important; color: white; border-top: 1px solid black; border-bottom: 1px solid black;">
-    <span>Filter Records</span>
-     <span>
+<div style="zoom: 90%; border-top: 1px solid gray; padding-top: 5px; padding-bottom: 5px; border-bottom: 1px solid gray;  border-top: 1px solid black; border-bottom: 1px solid black;">
+    <span id="labelTohide">Filter Records&nbsp;</span>
+     <span id="dropdowntohide">
         <select name="" id=""  #selection (change)="filterRecords(selection.value)" [(ngModel)]="filterValue">
-            <option value="">Select Customer Name</option>
+            <option value="all">ALL</option>
             <option value="{{customer.customerName}}" *ngFor="let customer of customerList; let i=index;">{{customer.customerName}}</option>
         </select>
     </span>
-    <span style="margin-left:20px;">
-        Net Payment Received : {{netPaymentReceived | number : '1.2-2'}}
+
+    <span style="margin-left:20px;">Invoice Amt : {{netInvoiceAmount | number : '1.2-2'}}</span>
+    <span style="margin-left:20px;" *ngIf="filterValue != 'all'">Last Fy Bal : {{simpleReport[0]?.lastFy | number : '1.2-2'}}</span>
+    <span style="margin-left:20px;" *ngIf="filterValue != 'all'">Total Due :
+    <span *ngIf="simpleReport[0]?.lastFy">{{netInvoiceAmount+simpleReport[0]?.lastFy | number : '1.2-2'}}</span>
+    <span *ngIf="!simpleReport[0]?.lastFy">{{netInvoiceAmount | number : '1.2-2'}}</span>
     </span>
-    <span style="margin-left:20px;"> Net Invoice Amount : {{netInvoiceAmount | number : '1.2-2'}}</span>
-    <span style="margin-left:20px;">Balance Remaining : {{balanceRemaining | number : '1.2-2'}}</span>
+    <span style="margin-left:20px;">
+        Credit : {{netPaymentReceived | number : '1.2-2'}}
+    </span>
+    <span style="margin-left:20px;">Balance : {{balanceRemaining | number : '1.2-2'}}</span>
 </div>
 
-<div class="row" style="zoom: 80%; ">
+<div class="row" style="zoom: 80%; " *ngIf="splitView">
     <div class="col-lg-7" >
-        <div class="row" style="background-color: rgb(201, 201, 201); border-top: 1px solid black; border-bottom: 1px solid black;">
+        <div class="row" style=" border-top: 1px solid black; border-bottom: 1px solid black;">
         
             <div class="col-lg-2 col-sm-2 col-md-2">Customer Name</div>
             <div class="col-lg-2 col-sm-2 col-md-2">Date Of Payment</div>
@@ -65,8 +71,8 @@
            
         </div>
     </div>
-    <div class="col-lg-5" style="border-left: 1px solid black;">
-        <div class="row" style="background-color: rgb(201, 201, 201); border-top: 1px solid black; border-bottom: 1px solid black;">
+    <div class="col-lg-5" style="border-left: 1px solid black;" *ngIf="splitView">
+        <div class="row" style="border-top: 1px solid black; border-bottom: 1px solid black;">
             <div class="col-lg-4 col-sm-4 col-md-4">Customer Name</div>
             <div class="col-lg-4 col-sm-4 col-md-4">Date Of Invoice</div>
             <div class="col-lg-4 col-sm-4 col-md-4">Invoice Amount</div>
@@ -79,7 +85,69 @@
                
         </div>
     </div>
-   
+
+</div>
+<div *ngIf="!splitView" style="margin: 0px 10px;">
+    <div class="row" ><div style="text-align:center; padding: 5px 0px; font-size: 18px; font-weight:500;">{{simpleReport[0]?.firmName}}</div>  </div>
+    <div class="row " style=" border-top: 1px solid black; border-bottom: 1px solid black;">
+        <div class="col-lg-2 col-sm-2 col-md-2">Date</div>
+        <div class="col-lg-2 col-sm-2 col-md-2">Invoice Number</div>
+        
+        <div class="col-lg-2 col-sm-2 col-md-2">Due/Invoice<br>Amount</div>
+        <div class="col-lg-3 col-sm-2 col-md-3">Payment Received</div>
+        <div class="col-lg-3 col-sm-2 col-md-3">Mode </div>
+
+        <!-- <div class="col-lg-2 col-sm-2 col-md-2">Payment Received On</div> -->
+        
+        </div>
+    <ng-container *ngIf="simpleReport.length>0">
+    <div class="row" >
+        <div class="col-lg-2 col-sm-2 col-md-2"><span *ngIf="simpleReport[0]?.lastFy">{{simpleReport[0].date | date:'dd-MMM-yyyy'}}</span><span *ngIf="!simpleReport[0]?.lastFy">-</span></div>
+        <div class="col-lg-2 col-sm-2 col-md-2">&nbsp;</div>
+        <div class="col-lg-2 col-sm-2 col-md-2"><span *ngIf="simpleReport[0]?.lastFy">Rs. </span>{{simpleReport[0]?.lastFy?.toFixed(0) }}</div>
+        <div class="col-lg-3 col-sm-2 col-md-3">&nbsp;</div>
+        <div class="col-lg-3 col-sm-2 col-md-3"><span >Last FY Balance</span></div>
+
+        <!-- <div class="col-lg-2 col-sm-2 col-md-2"><span *ngIf="!hist.invoiceNumber">{{hist.date | date:'dd-MMM-yyyy'}}</span></div> -->
+    </div>
+    <div class="row" *ngFor="let hist of simpleReport; let i=index;" [class.bgRowOdd]="i%2!=0">
+        <div class="col-lg-2 col-sm-2 col-md-2"><span *ngIf="hist.invoiceNumber">{{hist.date | date:'dd-MMM-yyyy'}}</span><span *ngIf="!hist.invoiceNumber">{{hist.date | date:'dd-MMM-yyyy'}}</span></div>
+        <div class="col-lg-2 col-sm-2 col-md-2">{{hist.invoiceNumber}}</div>
+        <div class="col-lg-2 col-sm-2 col-md-2"><span *ngIf="hist.invoiceValue">Rs. </span>{{hist.invoiceValue?.toFixed(0) }}</div>
+        <div class="col-lg-3 col-sm-2 col-md-3"><span *ngIf="hist.paymentReceived">Rs. </span>{{hist.paymentReceived}}</div>
+        <div class="col-lg-3 col-sm-2 col-md-3">{{hist.modeofPayment }}</div>
+
+        <!-- <div class="col-lg-2 col-sm-2 col-md-2"><span *ngIf="!hist.invoiceNumber">{{hist.date | date:'dd-MMM-yyyy'}}</span></div> -->
+</div>
+</ng-container>
+<ng-container>
+    <hr>
+    <div class="row" >
+        <div class="col-lg-2 col-sm-2 col-md-2">&nbsp;</div>
+        <div class="col-lg-2 col-sm-2 col-md-2">&nbsp;</div>
+        <div class="col-lg-2 col-sm-2 col-md-2">
+            <span *ngIf="simpleReport[0]?.lastFy">Rs. {{netInvoiceAmount+simpleReport[0]?.lastFy | number : '1.2-2'}}</span>
+            <span *ngIf="!simpleReport[0]?.lastFy">Rs. {{netInvoiceAmount | number : '1.2-2'}}</span>
+        </div>
+        <div class="col-lg-3 col-sm-2 col-md-3"><br> - Rs.{{netPaymentReceived | number : '1.2-2'}}</div>
+        <div class="col-lg-3 col-sm-2 col-md-3">&nbsp;</div>
+
+        <!-- <div class="col-lg-2 col-sm-2 col-md-2">&nbsp;</div> -->
+        <hr>
+        <div class="col-lg-2 col-sm-2 col-md-2">&nbsp;</div>
+        <div class="col-lg-2 col-sm-2 col-md-2">&nbsp;</div>
+        <div class="col-lg-4 col-sm-4 col-md-4" style="font-weight: 500;">
+            Balance Remaining : Rs. {{balanceRemaining | number : '1.2-2'}}
+        </div>
+        <div class="col-lg-3 col-sm-2 col-md-3">&nbsp;</div>
+
+        <!-- <div class="col-lg-2 col-sm-2 col-md-2">&nbsp;</div> -->
+    </div>
+    <hr>
+</ng-container>
+</div>
+<div style="position: fixed; right: 10px; bottom: 10px;">
+    <button (click)="printReport()" id="pbutton">Print Report</button>  <button id="toggleButton" (click)="toggleReportView()">{{viewButtonLabel}}</button>
 </div>
 
     

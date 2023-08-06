@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div>
-                    <div class="leftalign"><strong>{{gstin}}</strong></div>
+                    <div class="leftalign"><strong>GSTIN : {{gstin}}</strong></div>
                     <div class="float-right"  [class.bg-color]="invoiceType=='Duplicate'"><strong>&nbsp;{{invoiceType}}</strong></div>
                 </div>
                 
@@ -430,12 +430,20 @@
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="font-size: 14px;">
-                <div class="row">
+                <div class="row" style="margin-right: 0px;">
+                   <div style="border-bottom: 1px solid black;">
+                    <div style="font-size: 15px; font-weight: 500;">
+                        BANK DETAILS: HDFC BANK, HING KI MANDI, AGRA-282003.
+                    </div>
+                    <div style="font-size: 16px; font-weight: 500;">
+                        A/C NO - 50200032640264  ,  IFSC : HDFC0000297
+                    </div>
+                   </div>
                     <div style="text-align: right;" class="addPadding-right"><strong>For
                             {{companyName}}&nbsp;&nbsp;</strong>
                     </div>
                     <br>
-                    <br><br><br><br>
+                    <br><br>
                     <br><br>
                     <div style="text-align: right;" class="addPadding-right">Authorised Signatory&nbsp;&nbsp;</div>
                 </div>

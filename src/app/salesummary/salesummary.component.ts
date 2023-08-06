@@ -23,9 +23,14 @@ summaryBackup;
     this.invoiceService.getAllInvoicesDetails().subscribe(res=>
       {
         this.summary=res;
+        this.calculateTotal(this.summary)
         this.summaryBackup=res;
         //this.downloadCSVForB2B()
       })
+    
+  }
+  calculateTotal(sumary)
+  {
 
   }
   optionsb2b = { 
@@ -63,6 +68,7 @@ downloadCSVForB2B()
 {
   this.generateB2BSummary();
   let name = this.monthList[new Date(this.startDate).getMonth()] + "_" +this.monthList[new Date(this.endDate).getMonth()]+" "+new Date(this.startDate).getFullYear() + "_" + [(new Date(this.startDate).getFullYear())+1] + "_B2B_GSTR 1_3b";
+  // console.log(this.b2bsummary)
   new ngxCsv(this.b2bsummary, name, this.optionsb2b);
 }
 downloadCSVForB2C()
@@ -217,6 +223,7 @@ downloadCSVCurrentReport()
   }
   generateB2BSummary()
   {
+
     for(let i=0;i<this.summary.length;i++){
       
         if(this.summary[i].customer.customerGst!="" && !isNullOrUndefined(this.summary[i].customer.customerGst)){

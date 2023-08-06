@@ -23,6 +23,7 @@ import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { NgxCaptureModule } from 'ngx-capture';
 import { DemoComponent } from './demo/demo.component';
+
 @NgModule({
   declarations: [
     AppComponent,

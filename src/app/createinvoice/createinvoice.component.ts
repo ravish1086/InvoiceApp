@@ -36,7 +36,7 @@ export class CreateinvoiceComponent implements OnInit {
  reverseCharge="N";
  invoiceNumber=4;
  customerState;
- todaysDate=new Date().toDateString();
+ todaysDate;
   constructor(private otherdata:OtherdataService,private invoiceservice:InvoiceService,private router:Router,private route: ActivatedRoute,private stockservice:StockService ) { 
 
   }
@@ -44,6 +44,7 @@ export class CreateinvoiceComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.todaysDate=new Date()
     this.invoiceservice.getLastInvoiceNumber().subscribe(res=>
       {
         this.invoiceNumber=Number(res.invoiceNumber)+1;
@@ -84,7 +85,9 @@ export class CreateinvoiceComponent implements OnInit {
     // invoice.amount="";
     // invoice.quantity="";
     // invoice.description=""
-    this.invoiceView.pop()
+    this.invoiceView.pop();
+    this.calculateAmount(this.invoiceView.length -1);
+
   }
 
   sendData()
@@ -233,7 +236,7 @@ export class CreateinvoiceComponent implements OnInit {
     {
       var generateInvoice=new GenerateInvoice();
       generateInvoice.invoiceNo=this.invoiceNumber;
-      generateInvoice.invoiceDate=this.todaysDate;
+      generateInvoice.invoiceDate=new Date(this.todaysDate).toDateString();
       generateInvoice.placeOfSupply=this.customer.customerState;
       generateInvoice.reverseCharge=this.reverseCharge;
       generateInvoice.totalTaxableValue=this.totalTaxableValue;
@@ -289,7 +292,7 @@ export class CreateinvoiceComponent implements OnInit {
             })
           setTimeout(run=>
             {
-                this.router.navigate(['generatedInvoice',this.invoiceNumber])
+                this.router.navigate(['generatedInvoice',res.id])
             },2000);
         }
       }

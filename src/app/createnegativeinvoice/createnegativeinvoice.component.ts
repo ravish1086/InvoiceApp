@@ -224,6 +224,10 @@ export class CreatenegativeinvoiceComponent implements OnInit {
     }
     createInvoice()
     {
+      if(this.totalTaxableValue<=0){
+        alert("Please add atleast one product.");
+        return;
+      }
       var generateInvoice=new GenerateInvoice();
       generateInvoice.invoiceNo=this.invoiceNumber;
       generateInvoice.invoiceDate=this.todaysDate;
@@ -271,5 +275,11 @@ export class CreatenegativeinvoiceComponent implements OnInit {
         }
       }
       );
+    }
+
+    showTaxBrief=false;
+
+    toggleView(){
+      this.showTaxBrief = !this.showTaxBrief;
     }
 }

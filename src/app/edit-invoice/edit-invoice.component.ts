@@ -357,4 +357,9 @@ invoiceType=""
       }
       );
     }
+    showTaxBrief=false;
+
+    toggleView(){
+      this.showTaxBrief = !this.showTaxBrief;
+    }
 }

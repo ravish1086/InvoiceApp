@@ -68,7 +68,6 @@
         <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head">Amount</div>
 
     </div>
-    <div style="height: 220px; overflow-y: scroll; width: 102%;">
     <div class="row" *ngFor="let invoice of invoiceView; let i=index; ">
         <div class="col-lg-1 col-sm-1 col-md-1 col-xs-1 div-head"><input type="text" name="" value="{{i+1}}" id="id1"></div>
         <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3 div-head">
@@ -117,8 +116,9 @@
     </div> -->
     <!-- <select name="" id=""><option value="option value">option Value</option></select> -->
     <div class="footer">
+        <button (click)="toggleView()" class="btn btn-primary">Toggle View</button>
         <div class="taxDescription">
-            <table class="mytable">
+            <table class="mytable" *ngIf="showTaxBrief">
                 <tr class="rowheight"><td>TaxRate</td><td *ngIf="!interstate">SGST</td><td *ngIf="!interstate">CGST</td><td>TotalTax</td><td>TotalTaxable</td></tr>
                 <tr class="rowheight"><td>Tax 28%</td><td *ngIf="!interstate">{{sgstorcgstamt28}}</td><td *ngIf="!interstate">{{sgstorcgstamt28}}</td><td *ngIf="interstate">{{igstamt28}}</td><td *ngIf="interstate">{{igstamt28}}</td><td>{{sgstorcgstamt28*2}}</td><td>{{taxable28}}</td></tr>
                 <tr class="rowheight"><td>Tax 18%</td><td *ngIf="!interstate">{{sgstorcgstamt18}}</td><td *ngIf="!interstate">{{sgstorcgstamt18}}</td><td *ngIf="interstate">{{igstam18}}</td><td *ngIf="interstate">{{igstam18}}</td><td>{{sgstorcgstamt18*2}}</td><td>{{taxable18}}</td></tr>
@@ -126,10 +126,23 @@
                 <tr class="rowheight"><td>Tax 5%</td><td *ngIf="!interstate">{{sgstorcgstamt5}}</td><td *ngIf="!interstate">{{sgstorcgstamt5}}</td><td *ngIf="interstate">{{igstamt5}}</td><td *ngIf="interstate">{{igstamt5}}</td><td>{{sgstorcgstamt5*2}}</td><td>{{taxable5}}</td></tr>
             </table>
         </div>
-
+        <div>
+            <table *ngIf="!showTaxBrief">
+                <tr>
+                    <td>Total Tax:</td>
+                    <td>Rs. {{totalTax}}</td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td> Total Taxable Value:</td>
+                    <td>Rs. {{totalTaxableValue}}</td>
+                    <td>&nbsp;&nbsp;</td>
+                    <td>Total Invoice Value:</td>
+                    <td>Rs. {{totalInvoiceValue}}</td>
+                </tr>
+            </table>
+        </div>
         <div class="invTotal">
             <button class="btn btn-primary" (click)="updateInvoice()">Update Invoice</button>
-            <table>
+            <table *ngIf="showTaxBrief">
 
                 <tr>
                     <td>Total Tax</td>

@@ -11,24 +11,14 @@ input,select
 {
  bottom: 0;
  position: fixed;   
- height: 130px;
+ height: auto;
+ display: flex;
+ align-items: center;
+ justify-content: space-around;
  border-top:1px solid black;
  right: 0;
  left: 0;
  background-color: rgb(177, 177, 177);
-}
-.invTotal
-{
-    bottom: 0;
-    right: 0;
-    position: fixed;
-    /* float: right; */
-}
-.taxDescription
-{
-    bottom:0;
-    left: 0;
-    position: fixed;
 }
 
 .mytable

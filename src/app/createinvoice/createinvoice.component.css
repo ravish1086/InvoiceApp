@@ -14,7 +14,9 @@ input,select
 {
  bottom: 0;
  position: fixed;   
- height: 130px;
+ display: flex;
+ align-items: center;
+ justify-content: space-around;
  border-top:1px solid black;
  right: 0;
  left: 0;
@@ -22,17 +24,17 @@ input,select
 }
 .invTotal
 {
-    margin-left: -5%;
+    /* margin-left: -5%;
     bottom: 0;
     right: 0;
-    position: fixed;
+    position: fixed; */
     /* float: right; */
 }
 .taxDescription
 {
-    bottom:0;
+    /* bottom:0;
     left: 0;
-    position: fixed;
+    position: fixed; */
 }
 
 .mytable

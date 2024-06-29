@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiurl:'http://localhost:8888'
+  backendEnabled:false,
+  // apiurl:'http://localhost:8888',
+  apiurl:'http://localhost:4500/api/v1',
+  expressAppApiUrl:'http://localhost:4500/api/v1'
 };
 
 /*

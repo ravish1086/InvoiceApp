@@ -21,7 +21,6 @@ import { CreatenegativeinvoiceComponent } from './createnegativeinvoice/createne
 import { HsnsummaryComponent } from './hsnsummary/hsnsummary.component';
 import { EditInvoiceComponent } from './edit-invoice/edit-invoice.component';
 import { PaymentsComponent } from './payments/payments.component';
-import { NgxCaptureModule } from 'ngx-capture';
 import { DemoComponent } from './demo/demo.component';
 
 @NgModule({
@@ -48,8 +47,7 @@ import { DemoComponent } from './demo/demo.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    CommonModule,
-    NgxCaptureModule
+    CommonModule
   ],
   providers: [StockService,OtherdataService],
   bootstrap: [AppComponent]

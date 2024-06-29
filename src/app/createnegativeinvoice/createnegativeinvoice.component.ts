@@ -34,7 +34,7 @@ export class CreatenegativeinvoiceComponent implements OnInit {
  reverseCharge="N";
  invoiceNumber=4;
  customerState;
- todaysDate=new Date().toDateString();
+ todaysDate;
   constructor(private otherdata:OtherdataService,private invoiceservice:InvoiceService,private router:Router,private route: ActivatedRoute ) { 
 
   }
@@ -42,6 +42,7 @@ export class CreatenegativeinvoiceComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.todaysDate=new Date()
     this.invoiceservice.getLastInvoiceNumber().subscribe(res=>
       {
         this.invoiceNumber=Number(res.invoiceNumber)+1;
@@ -230,7 +231,7 @@ export class CreatenegativeinvoiceComponent implements OnInit {
       }
       var generateInvoice=new GenerateInvoice();
       generateInvoice.invoiceNo=this.invoiceNumber;
-      generateInvoice.invoiceDate=this.todaysDate;
+      generateInvoice.invoiceDate=new Date(this.todaysDate).toDateString();
       generateInvoice.placeOfSupply=this.customer.customerState;
       generateInvoice.reverseCharge=this.reverseCharge;
       generateInvoice.totalTaxableValue=this.totalTaxableValue;

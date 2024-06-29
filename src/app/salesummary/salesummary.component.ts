@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { InvoiceService } from '../services/invoice.service';
 import { ngxCsv } from 'ngx-csv/ngx-csv';
 import { B2BModel, B2CModel } from '../models/b2breport.model';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-salesummary',
@@ -157,7 +156,7 @@ downloadCSVCurrentReport()
     // rowData28.taxablevalue=0
     for(let i=0;i<this.summary.length;i++){
 
-      if(this.summary[i].customer.customerGst=="" || isNullOrUndefined(this.summary[i].customer.customerGst)){
+      if(this.summary[i].customer.customerGst=="" || !(this.summary[i].customer.customerGst)){
           //  let  rowData=new B2CModel();
           //rowData.gstin=this.summary[i].customer.customerGst
     //  rowData.type="OE"
@@ -210,13 +209,13 @@ downloadCSVCurrentReport()
        
     }
   }
-  if(rowData5.taxablevalue!=0 && !isNullOrUndefined(rowData5.taxablevalue))
+  if(rowData5.taxablevalue!=0 && (rowData5.taxablevalue))
   this.b2csummary.push(rowData5);
-  if(rowData12.taxablevalue!=0 && !isNullOrUndefined(rowData12.taxablevalue))
+  if(rowData12.taxablevalue!=0 && (rowData12.taxablevalue))
   this.b2csummary.push(rowData12);
-  if(rowData18.taxablevalue!=0 && !isNullOrUndefined(rowData18.taxablevalue))
+  if(rowData18.taxablevalue!=0 && (rowData18.taxablevalue))
   this.b2csummary.push(rowData18);
-  if(rowData28.taxablevalue!=0 && !isNullOrUndefined(rowData28.taxablevalue))
+  if(rowData28.taxablevalue!=0 && (rowData28.taxablevalue))
   this.b2csummary.push(rowData28);
   
   console.log(this.b2csummary);  
@@ -226,7 +225,7 @@ downloadCSVCurrentReport()
 
     for(let i=0;i<this.summary.length;i++){
       
-        if(this.summary[i].customer.customerGst!="" && !isNullOrUndefined(this.summary[i].customer.customerGst)){
+        if(this.summary[i].customer.customerGst!="" && (this.summary[i].customer.customerGst)){
              let  rowData=new B2BModel();
             rowData.gstin=this.summary[i].customer.customerGst
           rowData.name=this.summary[i].customer.customerName;

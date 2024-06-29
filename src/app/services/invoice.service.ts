@@ -4,12 +4,13 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
+import { ApiPathExpressServer, ApiPathsJsonServer } from '../apiPaths';
 
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
-
+  apiPaths = environment.backendEnabled?ApiPathExpressServer:ApiPathsJsonServer;
   constructor(private http:HttpClient) { }
 
   generateInvoice(reqJson):Observable<any>

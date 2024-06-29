@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { isNullOrUndefined } from 'util';
 import * as XLSX from 'xlsx';
 import { ProductDetails } from '../models/product.model';
 import { OtherdataService } from '../services/otherdata.service';
@@ -101,7 +100,7 @@ export class AddedproductsComponent implements OnInit {
     product.inStock = 0;
     this.otherdataservice.addProducttoDb(product).subscribe((res) => {
       console.log(res);
-      if (!isNullOrUndefined(res)) {
+      if ((res)) {
         alert('Product has been added Successfully');
         this.savedProducts.push(product);
       }

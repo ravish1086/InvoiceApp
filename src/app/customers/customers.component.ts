@@ -3,8 +3,6 @@ import { CustomerModel } from '../models/customer.model';
 
 import { OtherdataService } from '../services/otherdata.service';
 import * as XLSX from 'xlsx';
-import { isNull } from '@angular/compiler/src/output/output_ast';
-import { isNullOrUndefined } from 'util';
 
 @Component({
   selector: 'app-customers',
@@ -56,7 +54,7 @@ addCustomerForm=false;
               console.log(res);
               // console.log(res==customer)
               // console.log(res.status)
-              if(!isNullOrUndefined(res))
+              if((res))
               {
                 alert("Customer has been added Successfully");
                 this.savedCustomers.push(customer)

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { OtherdataService } from './services/otherdata.service';
-import { NgxCaptureService } from 'ngx-capture';
 import { tap } from 'rxjs/operators';
 import { DomSanitizer } from '@angular/platform-browser';
 import { data } from './data';
@@ -15,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'EZInvoice';
 show=false;
   selectedFileBLOB: any;
-  constructor(private _sanitizer: DomSanitizer,private otherdataservice:OtherdataService,private captureService:NgxCaptureService)
+  constructor(private _sanitizer: DomSanitizer,private otherdataservice:OtherdataService)
   {
   
   }
@@ -26,25 +25,7 @@ show=false;
   }
   capture()
   {
-this.captureService.getImage(this.screen.nativeElement, true).pipe(
-  tap(img => {
-    console.log(img);
-    // this.imagePath = new File([this.DataURIToBlob(img)],'screenshot.png',{
-    //   type: "'image/png'"
-    // })
-    this.imagePath=this.DataURIToBlob(img)
-    console.log(this.imagePath)
-    //this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
-                // + img.base64string);
-    // this.image=this.DataURIToBlob(img)
-    // console.log(this.image)
-    let url = window.URL.createObjectURL(this.imagePath);
 
-    this.selectedFileBLOB = this._sanitizer.bypassSecurityTrustUrl(url);
-    // window.open(this.selectedFileBLOB,"#")
-     this.show=true;
-  })
-).subscribe();
     
   }
   

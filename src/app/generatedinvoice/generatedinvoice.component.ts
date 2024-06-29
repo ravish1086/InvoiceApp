@@ -1,8 +1,7 @@
-import { isNull } from '@angular/compiler/src/output/output_ast';
+
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import jsPDF from 'jspdf';
-import { isNullOrUndefined } from 'util';
 
 import { InvoiceService } from '../services/invoice.service';
 import { OtherdataService } from '../services/otherdata.service';
@@ -113,7 +112,6 @@ toggleOD(type)
 
   ngOnInit(): void {
    
-    console.log(isNullOrUndefined(this.invoiceType))
     this.route.params.subscribe(params=>
       {
         this.invoiceNum=params['invoicenum'];
